@@ -14,7 +14,7 @@ PLATFORM=linux64
 # Buildpack URL
 ARCHIVE_NAME=firefox
 FILE_NAME=${ARCHIVE_NAME}-${VERSION}.tar.bz2
-BUILDPACK_FIREFOX_PACKAGE="https://ftp.mozilla.org/pub/firefox/releases/${VERSION}/linux-x86_64/${LANG}/"
+BUILDPACK_FIREFOX_PACKAGE="https://ftp.mozilla.org/pub/firefox/releases/${VERSION}/linux-x86_64/${LANG}/${FILE_NAME}"
 #BUILDPACK_FIREFOX_PACKAGE="https://download.mozilla.org/?product=firefox-${VERSION}-SSL&os=linux&lang=${LANG}"
 
 mkdir -p $CACHE_DIR
@@ -26,5 +26,5 @@ fi
 echo "-----> Extracting Firefox binaries to ${BUILD_DIR}/vendor/${ARCHIVE_NAME}"
 mkdir -p $CACHE_DIR/$ARCHIVE_NAME
 mkdir -p $BUILD_DIR/vendor
-bzip2 -d $CACHE_DIR/$FILE_NAME -C $CACHE_DIR
+tar jxf $CACHE_DIR/$FILE_NAME -C $CACHE_DIR
 mv $CACHE_DIR/$ARCHIVE_NAME $BUILD_DIR/vendor/
